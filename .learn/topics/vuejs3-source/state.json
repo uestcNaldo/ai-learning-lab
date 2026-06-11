@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "topic": "Vue.js 3.x 源码学习",
+  "slug": "vuejs3-source",
+  "created": "2026-06-10",
+  "domains": [
+    {
+      "name": "响应式系统 (Reactivity)",
+      "slug": "reactivity",
+      "concepts": [
+        {
+          "name": "reactive 与 Proxy 代理",
+          "slug": "reactive-proxy",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["Proxy handlers (get/set/deleteProperty/has/ownKeys)", "ReactFlags 与 targetMap", "浅层响应式 shallowReactive"]
+        },
+        {
+          "name": "ref 与 RefImpl",
+          "slug": "ref-refimpl",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["RefImpl 类设计", "toRefs / toRef", "shallowRef", "triggerRef 手动触发"]
+        },
+        {
+          "name": "effect 与副作用",
+          "slug": "effect-side-effect",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["ReactiveEffect 类", "依赖收集 track()", "触发更新 trigger()", "effect scope"]
+        },
+        {
+          "name": "computed 实现",
+          "slug": "computed-impl",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["懒求值与缓存机制", "dirty flag 设计", "ComputedRefImpl"]
+        },
+        {
+          "name": "watch 与 watchEffect",
+          "slug": "watch-watcheffect",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["traverse 深度遍历", "scheduler 调度", "cleanup 机制"]
+        },
+        {
+          "name": "调度器 Scheduler",
+          "slug": "scheduler",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["queueFlush 与微任务队列", "nextTick 实现", "job 优先级排序"]
+        }
+      ]
+    },
+    {
+      "name": "虚拟 DOM (Virtual DOM)",
+      "slug": "virtual-dom",
+      "concepts": [
+        {
+          "name": "VNode 设计与创建",
+          "slug": "vnode-design",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["VNode 接口定义", "createVNode / _createVNode", "Fragment / Text / Comment"]
+        },
+        {
+          "name": "ShapeFlags 与 PatchFlags",
+          "slug": "flags",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["ShapeFlags 位掩码 (ELEMENT/STATEFUL_COMPONENT等)", "PatchFlags 优化标记", "Block 与 dynamicChildren"]
+        },
+        {
+          "name": "Diff 算法 (patchKeyedChildren)",
+          "slug": "diff-algorithm",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["5步处理: 头头/尾尾/头尾/尾头/乱序", "最长递增子序列 (LIS)", "移动与卸载策略"]
+        },
+        {
+          "name": "Renderer 渲染器",
+          "slug": "renderer",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["createRenderer 工厂函数", "patch / mount / unmount", "processElement / processComponent", "DOM 操作封装 (nodeOps)"]
+        }
+      ]
+    },
+    {
+      "name": "组件系统 (Component System)",
+      "slug": "component-system",
+      "concepts": [
+        {
+          "name": "组件实例 ComponentInternalInstance",
+          "slug": "component-instance",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["实例属性与上下文", "vnode -> instance 映射", "proxy 代理对象"]
+        },
+        {
+          "name": "组件挂载流程",
+          "slug": "component-mount",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["mountComponent", "setup 函数执行", "renderEffect 创建与首次渲染"]
+        },
+        {
+          "name": "组件更新流程",
+          "slug": "component-update",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["updateComponent", "subTree 对比", "优化路径: 复用 vs 重渲染"]
+        },
+        {
+          "name": "Props 与 Emit",
+          "slug": "props-emit",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["initProps / updateProps", "emit 类型推导与实现", "attrs 透传"]
+        },
+        {
+          "name": "Slots 实现",
+          "slug": "slots",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["Slots 类型 (正常/作用域/动态)", "ensureValidVNode", "编译时与运行时协作"]
+        },
+        {
+          "name": "Provide / Inject",
+          "slug": "provide-inject",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["组件链上的注入链", "Symbol key 与默认值", "响应式注入"]
+        },
+        {
+          "name": "生命周期钩子",
+          "slug": "lifecycle-hooks",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["钩子注册与调用时机", "setup 中的钩子 (onMounted等)", "当前实例注入 (currentInstance)"]
+        }
+      ]
+    },
+    {
+      "name": "编译器 (Compiler)",
+      "slug": "compiler",
+      "concepts": [
+        {
+          "name": "模板解析器 Parser",
+          "slug": "template-parser",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["有限状态机解析", "AST 节点类型", "指令与表达式解析"]
+        },
+        {
+          "name": "Transform 转换插件",
+          "slug": "transform-plugins",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["transformElement", "vIf / vFor 转换", "vModel 转换", "slotOutlet 转换"]
+        },
+        {
+          "name": "代码生成 Codegen",
+          "slug": "codegen",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["generate 函数", "渲染函数字符串拼接", "辅助函数 (_ctx, _push 等)"]
+        },
+        {
+          "name": "静态提升与优化",
+          "slug": "static-hoisting",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["静态节点提升 (hoistStatic)", "PatchFlags 标记", "Block Tree 收集动态节点"]
+        },
+        {
+          "name": "SFC 编译",
+          "slug": "sfc-compiler",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["@vue/compiler-sfc", "parse 解析 SFC", "compileScript / compileTemplate / compileStyle"]
+        }
+      ]
+    },
+    {
+      "name": "应用架构 (Application Architecture)",
+      "slug": "application-arch",
+      "concepts": [
+        {
+          "name": "createApp 与应用实例",
+          "slug": "create-app",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["ensureRenderer", "app.mount 流程", "app.unmount"]
+        },
+        {
+          "name": "插件系统",
+          "slug": "plugin-system",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["app.use 实现", "install 约定", "provide 注入插件上下文"]
+        },
+        {
+          "name": "自定义渲染器 Custom Renderer",
+          "slug": "custom-renderer",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["createRenderer 抽象", "nodeOps 替换 (Canvas/Native)", "运行时与平台无关设计"]
+        },
+        {
+          "name": "内置组件",
+          "slug": "built-in-components",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["KeepAlive 缓存策略", "Teleport 移动节点", "Suspense 异步依赖", "Transition 动画钩子"]
+        }
+      ]
+    },
+    {
+      "name": "工程架构 (Project Architecture)",
+      "slug": "project-arch",
+      "concepts": [
+        {
+          "name": "Monorepo 与包结构",
+          "slug": "monorepo-packages",
+          "status": "in_progress",
+          "confidence": 0.05,
+          "practice_count": 0,
+          "explain_count": 1,
+          "last_explained": "2026-06-11",
+          "last_practiced": null,
+          "details": ["packages 目录结构", "包间依赖关系", "rollup/esbuild 构建"]
+        },
+        {
+          "name": "TypeScript 类型系统",
+          "slug": "typescript-types",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["核心类型定义", "泛型推导", "类型体操 (ExtractComputedReturns等)"]
+        },
+        {
+          "name": "共享工具与辅助",
+          "slug": "shared-utils",
+          "status": "unexplored",
+          "confidence": 0,
+          "practice_count": 0,
+          "explain_count": 0,
+          "last_explained": null,
+          "last_practiced": null,
+          "details": ["@vue/shared 工具函数", "全局变量 (__DEV__, __TEST__)", "通用缓存 (LRU)"]
+        }
+      ]
+    }
+  ]
+}
