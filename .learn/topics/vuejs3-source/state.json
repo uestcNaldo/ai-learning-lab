@@ -330,8 +330,8 @@
           "status": "in_progress",
           "confidence": 0.05,
           "practice_count": 0,
-          "explain_count": 1,
-          "last_explained": "2026-06-11",
+          "explain_count": 2,
+          "last_explained": "2026-06-12",
           "last_practiced": null,
           "details": ["packages 目录结构", "包间依赖关系", "rollup/esbuild 构建"]
         },

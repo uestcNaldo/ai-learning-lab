@@ -9,16 +9,16 @@
 
 const packageMap = {
   "@vue/shared": {
-    role: "TODO",
+    role: "公共工具函数和常量",
     dependsOn: [],
   },
   "@vue/reactivity": {
-    role: "TODO",
-    dependsOn: ["TODO"],
+    role: "响应式系统：包含 reactive、ref、effect、readonly、computed、track、trigger 等核心 API",
+    dependsOn: ["@vue/shared"],
   },
   "@vue/runtime-core": {
-    role: "TODO",
-    dependsOn: ["TODO", "TODO"],
+    role: "与平台无关的运行时核心，负责VNode、组件、renderer、调度器等核心逻辑",
+    dependsOn: ["@vue/shared", "@vue/reactivity"],
   },
   "@vue/runtime-dom": {
     role: "TODO",
