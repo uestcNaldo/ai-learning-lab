@@ -128,7 +128,7 @@
 
 ## 工程架构 (Project Architecture)
 
-- 🔵 **Monorepo 与包结构** (in progress)
+- 🟠 **Monorepo 与包结构** (needs practice)
   - packages 目录结构
   - 包间依赖关系
   - rollup/esbuild 构建

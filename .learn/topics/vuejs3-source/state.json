@@ -327,12 +327,12 @@
         {
           "name": "Monorepo 与包结构",
           "slug": "monorepo-packages",
-          "status": "in_progress",
-          "confidence": 0.05,
-          "practice_count": 0,
-          "explain_count": 2,
-          "last_explained": "2026-06-12",
-          "last_practiced": null,
+          "status": "needs_practice",
+          "confidence": 0.45,
+          "practice_count": 3,
+          "explain_count": 4,
+          "last_explained": "2026-06-15",
+          "last_practiced": "2026-06-15",
           "details": ["packages 目录结构", "包间依赖关系", "rollup/esbuild 构建"]
         },
         {

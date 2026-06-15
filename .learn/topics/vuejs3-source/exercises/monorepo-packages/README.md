@@ -24,9 +24,9 @@ Vue 3 的源码不是一个巨大的单包，而是由多个 `packages/*` 组成
 ## Requirements
 
 - [ ] 补全 `packageMap` 中每个 package 的 `role`。
-- [ ] 补全 `packageMap` 中每个 package 的 `dependsOn`。
+- [ ] 补全 `packageMap` 中每个 package 的 `dependsOn`。这里练的是依赖集合，顺序不重要。
 - [ ] 补全 `apiOwners`，把 API 映射到最合适的 package。
-- [ ] 实现 `dependencyChainToVueRuntimeDom()`。
+- [ ] 实现 `dependencyChainToVueRuntimeDom()`。这里练的是从底层到上层的依赖链路，顺序重要。
 - [ ] 实现 `explainApiOwner(apiName)`。
 - [ ] 运行 `node starter.mjs`，让所有测试通过。
 

@@ -1,3 +1,10 @@
+# Practice Session - 2026-06-15
+
+## Concept Practiced
+- Concept: Monorepo 与包结构 | Difficulty: Beginner | Exercise: Vue 3 package map
+
+## User's Submitted Code
+```javascript
 /**
  * Monorepo 与包结构 — Beginner
  *
@@ -65,74 +72,22 @@ function explainApiOwner(apiName) {
   const owner = apiOwners[apiName]
   return `${apiName} belongs to ${owner} because reactive是响应式系统的核心API，而@vue/reactivity是负责实现响应式系统的包，所以reactive属于@vue/reactivity。`
 }
+```
 
-// === Test cases ===
+## AI Feedback
+你这次练习的核心完成度是好的：你已经把 Vue 3 monorepo 的主要分层抓住了，尤其是 `@vue/shared` 作为底层工具包、`@vue/reactivity` 作为响应式核心、`@vue/runtime-core` 作为平台无关运行时、`@vue/runtime-dom` 作为浏览器平台运行时，这条 runtime 主线已经能连起来。
 
-function assertEqual(actual, expected, label) {
-  if (actual !== expected) {
-    throw new Error(`${label}: expected ${expected}, got ${actual}`)
-  }
-}
+比较值得表扬的是，你指出了练习测试里的一个设计问题：`dependsOn` 本质上表达依赖集合，不应该要求固定顺序；而 `dependencyChainToVueRuntimeDom()` 表达从底层到上层的链路，顺序才应该严格。这说明你不是机械迎合测试，而是在判断测试是否符合概念本身。这个意识很重要。
 
-function assertDeepEqual(actual, expected, label) {
-  const actualJson = JSON.stringify(actual)
-  const expectedJson = JSON.stringify(expected)
-  if (actualJson !== expectedJson) {
-    throw new Error(`${label}: expected ${expectedJson}, got ${actualJson}`)
-  }
-}
+需要继续打磨的点有两个：
 
-function assertSameMembers(actual, expected, label) {
-  assertDeepEqual([...actual].sort(), [...expected].sort(), label)
-}
+1. `explainApiOwner(apiName)` 目前无论传入什么 API，理由都写成 `reactive` 的解释。测试只检查返回值包含 owner，所以它通过了，但从学习质量看，应该让解释根据 `apiName` 分支变化。例如 `createRenderer` 应解释为 renderer 抽象属于 `@vue/runtime-core`，`createApp` 应解释为浏览器应用入口属于 `@vue/runtime-dom`。
+2. `vue` 包的 role 还可以更精确一些。它不是“导出一个 Vue 实例”，而是“面向用户的主入口聚合包”，会根据不同 build / deep import 暴露 runtime、compiler-sfc、server-renderer 等能力。
 
-function assertIncludes(text, expected, label) {
-  if (!text.includes(expected)) {
-    throw new Error(`${label}: expected text to include ${expected}, got ${text}`)
-  }
-}
+边界提醒：当前练习是 Beginner 简化版。真实 Vue 3 源码里，`@vue/runtime-dom` 的 package.json 还直接声明了 `@vue/reactivity`，`@vue/compiler-sfc` 还依赖 `@vue/compiler-ssr`，`vue` 主包还声明了 `@vue/server-renderer`。这些可以放到下一轮 Challenge 练习里处理。
 
-console.log("Running monorepo package map tests...")
+Context7 对照 Vue 官方文档后，练习方向是成立的：官方说明 `@vue/compiler-sfc` 是处理 SFC 的低层工具，并作为主 Vue 包的依赖；runtime-only build 会排除 compiler，模板通常在构建阶段预编译，从而减少浏览器端负担。
 
-assertEqual(packageMap["@vue/shared"].dependsOn.length, 0, "shared has no internal dependency")
-assertSameMembers(
-  packageMap["@vue/reactivity"].dependsOn,
-  ["@vue/shared"],
-  "reactivity dependency",
-)
-assertSameMembers(
-  packageMap["@vue/runtime-core"].dependsOn,
-  ["@vue/shared", "@vue/reactivity"],
-  "runtime-core dependencies",
-)
-assertSameMembers(
-  packageMap["@vue/runtime-dom"].dependsOn,
-  ["@vue/runtime-core", "@vue/shared"],
-  "runtime-dom dependencies",
-)
-assertSameMembers(
-  packageMap["@vue/compiler-dom"].dependsOn,
-  ["@vue/compiler-core", "@vue/shared"],
-  "compiler-dom dependencies",
-)
-
-assertEqual(apiOwners.reactive, "@vue/reactivity", "reactive owner")
-assertEqual(apiOwners.ref, "@vue/reactivity", "ref owner")
-assertEqual(apiOwners.effect, "@vue/reactivity", "effect owner")
-assertEqual(apiOwners.createRenderer, "@vue/runtime-core", "createRenderer owner")
-assertEqual(apiOwners.createApp, "@vue/runtime-dom", "createApp owner")
-assertEqual(apiOwners.h, "@vue/runtime-core", "h owner")
-assertEqual(apiOwners.parse, "@vue/compiler-core", "parse owner")
-assertEqual(apiOwners.compileTemplate, "@vue/compiler-sfc", "compileTemplate owner")
-
-assertDeepEqual(
-  dependencyChainToVueRuntimeDom(),
-  ["@vue/shared", "@vue/reactivity", "@vue/runtime-core", "@vue/runtime-dom"],
-  "runtime-dom dependency chain",
-)
-
-assertIncludes(explainApiOwner("reactive"), "@vue/reactivity", "reactive explanation")
-assertIncludes(explainApiOwner("createRenderer"), "@vue/runtime-core", "createRenderer explanation")
-assertIncludes(explainApiOwner("createApp"), "@vue/runtime-dom", "createApp explanation")
-
-console.log("All tests passed")
+## Assessment
+- Understanding: Good
+- Status: in_progress → needs_practice | Confidence: 0.1 → 0.15
