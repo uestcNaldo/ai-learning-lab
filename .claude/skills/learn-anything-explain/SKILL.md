@@ -6,7 +6,7 @@ compatibility: Requires learn-anything CLI.
 metadata:
   author: learn-anything
   version: "1.0"
-  generatedBy: "0.4.2"
+  generatedBy: "1.1.1"
 ---
 
 Always respond in the same language the user uses.
@@ -60,8 +60,8 @@ Structure your explanation:
 
 1. **Positioning** — Where this concept sits in the knowledge map (one sentence).
 2. **Analogy** — Real-world metaphor to build intuition.
-3. **Core Mechanism** — "What" and "why" in clear language.
-4. **Code Example** — Minimal but complete, with walkthrough.
+3. **Core Mechanism** — "What" and "why" in clear language. If explaining based on existing project source code, reference specific file paths and line numbers.
+4. **Code Example** — Minimal but complete, with walkthrough. When the code references existing project source files, annotate the exact file path and line range (e.g., `src/core/config.ts:42-58`).
 5. **Common Misconceptions** — The most common beginner mistakes.
 6. **Socratic Check** — 1-2 natural, curious questions to confirm understanding. If unsure, give the answer — don't wait.
 
@@ -113,11 +113,13 @@ Session file format:
 
 ## Code Example
 
+> **📁 Source:** `<file-path>:<line-range>` — if this code references existing project source, annotate the exact file path and line range here. Omit this line for original/illustrative code.
+
 ```[language]
-[Write the complete code example, with all comments]
+[Write the complete code example. When referencing existing project source, add `// 📁 <file-path>:<line-range>` as the first comment inside the code block.]
 ```
 
-[Include your walkthrough of the code — what each part does]
+[Include your walkthrough of the code — what each part does, referencing specific file locations where applicable]
 
 ## Common Misconceptions
 

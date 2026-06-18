@@ -6,7 +6,7 @@ compatibility: Requires learn-anything CLI.
 metadata:
   author: learn-anything
   version: "1.0"
-  generatedBy: "0.4.2"
+  generatedBy: "1.1.1"
 ---
 
 Always respond in the same language the user uses.
