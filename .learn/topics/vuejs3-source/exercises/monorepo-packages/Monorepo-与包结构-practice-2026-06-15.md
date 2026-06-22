@@ -1,9 +1,9 @@
-# Practice Session - 2026-06-15
+# 练习记录 - 2026-06-15
 
-## Concept Practiced
-- Concept: Monorepo 与包结构 | Difficulty: Beginner | Exercise: Vue 3 package map
+## 练习概念
+- 概念: Monorepo 与包结构 | 难度: 入门 | 练习: Vue 3 package map
 
-## User's Submitted Code
+## 用户提交的代码
 ```javascript
 /**
  * Monorepo 与包结构 — Beginner
@@ -74,7 +74,7 @@ function explainApiOwner(apiName) {
 }
 ```
 
-## AI Feedback
+## AI 反馈
 你这次练习的核心完成度是好的：你已经把 Vue 3 monorepo 的主要分层抓住了，尤其是 `@vue/shared` 作为底层工具包、`@vue/reactivity` 作为响应式核心、`@vue/runtime-core` 作为平台无关运行时、`@vue/runtime-dom` 作为浏览器平台运行时，这条 runtime 主线已经能连起来。
 
 比较值得表扬的是，你指出了练习测试里的一个设计问题：`dependsOn` 本质上表达依赖集合，不应该要求固定顺序；而 `dependencyChainToVueRuntimeDom()` 表达从底层到上层的链路，顺序才应该严格。这说明你不是机械迎合测试，而是在判断测试是否符合概念本身。这个意识很重要。
@@ -84,10 +84,10 @@ function explainApiOwner(apiName) {
 1. `explainApiOwner(apiName)` 目前无论传入什么 API，理由都写成 `reactive` 的解释。测试只检查返回值包含 owner，所以它通过了，但从学习质量看，应该让解释根据 `apiName` 分支变化。例如 `createRenderer` 应解释为 renderer 抽象属于 `@vue/runtime-core`，`createApp` 应解释为浏览器应用入口属于 `@vue/runtime-dom`。
 2. `vue` 包的 role 还可以更精确一些。它不是“导出一个 Vue 实例”，而是“面向用户的主入口聚合包”，会根据不同 build / deep import 暴露 runtime、compiler-sfc、server-renderer 等能力。
 
-边界提醒：当前练习是 Beginner 简化版。真实 Vue 3 源码里，`@vue/runtime-dom` 的 package.json 还直接声明了 `@vue/reactivity`，`@vue/compiler-sfc` 还依赖 `@vue/compiler-ssr`，`vue` 主包还声明了 `@vue/server-renderer`。这些可以放到下一轮 Challenge 练习里处理。
+边界提醒：当前练习是入门简化版。真实 Vue 3 源码里，`@vue/runtime-dom` 的 package.json 还直接声明了 `@vue/reactivity`，`@vue/compiler-sfc` 还依赖 `@vue/compiler-ssr`，`vue` 主包还声明了 `@vue/server-renderer`。这些可以放到下一轮挑战练习里处理。
 
 Context7 对照 Vue 官方文档后，练习方向是成立的：官方说明 `@vue/compiler-sfc` 是处理 SFC 的低层工具，并作为主 Vue 包的依赖；runtime-only build 会排除 compiler，模板通常在构建阶段预编译，从而减少浏览器端负担。
 
-## Assessment
-- Understanding: Good
-- Status: in_progress → needs_practice | Confidence: 0.1 → 0.15
+## 评估
+- 理解程度: 良好
+- 状态: in_progress → needs_practice | 信心值: 0.1 → 0.15

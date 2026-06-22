@@ -1,6 +1,6 @@
-# Monorepo 与包结构 — Beginner Practice
+# Monorepo 与包结构 — 入门练习
 
-## Goal
+## 练习目标
 
 通过补全一张 Vue 3 package 地图，练习把常见 API、源码职责和 package 分层对应起来。
 
@@ -11,17 +11,17 @@
 - `compiler-core`、`compiler-dom`、`compiler-sfc` 的边界分别是什么？
 - `vue` 主包为什么更像聚合入口，而不是全部实现本身？
 
-## Background
+## 背景
 
 Vue 3 的源码不是一个巨大的单包，而是由多个 `packages/*` 组成。官方源码文档中，`@vue/runtime-core` 是自定义 renderer 的基础；`@vue/runtime-dom` 提供浏览器 DOM 渲染入口；`@vue/reactivity` 可以独立发布，也会被面向用户的 renderer 重新导出。
 
 这次练习不要求你真实克隆 Vue 源码。先把“包职责”和“依赖方向”练清楚，后面读源码会轻很多。
 
-## Files
+## 文件
 
 - `starter.mjs`：你要编辑的练习文件。
 
-## Requirements
+## 实现要求
 
 - [ ] 补全 `packageMap` 中每个 package 的 `role`。
 - [ ] 补全 `packageMap` 中每个 package 的 `dependsOn`。这里练的是依赖集合，顺序不重要。
@@ -30,7 +30,7 @@ Vue 3 的源码不是一个巨大的单包，而是由多个 `packages/*` 组成
 - [ ] 实现 `explainApiOwner(apiName)`。
 - [ ] 运行 `node starter.mjs`，让所有测试通过。
 
-## Package Hints
+## 包提示
 
 <details>
 <summary>点开看 package 职责提示</summary>
@@ -46,12 +46,12 @@ Vue 3 的源码不是一个巨大的单包，而是由多个 `packages/*` 组成
 
 </details>
 
-## Related Concepts
+## 相关概念
 
 - 当前概念：`monorepo-packages`
 - 建议后续：`shared-utils`
 - 再后续：`reactive-proxy`
 
-## Done Signal
+## 完成信号
 
 当 `node starter.mjs` 输出 `All tests passed` 后，告诉我“练习完成”，我会读取你的代码并给反馈。

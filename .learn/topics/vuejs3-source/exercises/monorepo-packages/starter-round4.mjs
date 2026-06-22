@@ -1,7 +1,8 @@
 /**
  * Monorepo 与包结构 — Dependency Layers and Build Profiles
  *
- * Replace every TODO with real implementation. Then run:
+ * 把每个 TODO 替换成真实实现。
+ * 然后运行：
  *
  *   node starter-round4.mjs
  */
@@ -16,8 +17,8 @@ function readPackageJson(packageDir) {
 }
 
 function isWorkspaceRange(value) {
-  // TODO: return true only when value is a string starting with "workspace:".
-  // Only workspace ranges point to other packages inside this monorepo.
+  // TODO: 只有当 value 是以 "workspace:" 开头的字符串时才返回 true。
+  // 只有 workspace range 才指向这个 monorepo 内部的其他 package。
   if (typeof value === "string" && value.startsWith("workspace:")) {
     return true
   }
@@ -25,9 +26,9 @@ function isWorkspaceRange(value) {
 }
 
 function getWorkspaceDeps(packageJson) {
-  // TODO: return dependency names whose version is a workspace range.
-  // Only inspect packageJson.dependencies, not devDependencies.
-  // dependencies describe package-to-package edges; devDependencies are tooling/test edges.
+  // TODO: 返回版本号是 workspace range 的依赖名称。
+  // 只检查 packageJson.dependencies，不检查 devDependencies。
+  // dependencies 表示 package 到 package 的边；devDependencies 表示工具链/测试相关的边。
   return Object.keys(packageJson.dependencies || {}).filter(depName => {
     const depVersion = packageJson.dependencies[depName]
     return isWorkspaceRange(depVersion)
@@ -57,15 +58,15 @@ function buildWorkspaceDependencyGraph(packagesDir) {
 }
 
 function getTransitiveDeps(graph, packageName) {
-  // Do not include packageName itself in the returned array.
-  // Return a sorted array for stable output.
-  // Walk the dependency graph from the entry package and collect every reachable package.
+  // 不要把 packageName 本身放进返回数组。
+  // 返回排序后的数组，保证输出稳定。
+  // 从入口 package 沿依赖图遍历，收集所有可达 package。
   const deps = new Set()
   const stack = [...(graph[packageName] || [])]
 
   while (stack.length > 0) {
     const depName = stack.pop()
-    // Set membership prevents duplicate output and avoids loops in cyclic graphs.
+    // Set 成员检查可以避免重复输出，也能避免在环形图里死循环。
     if (depName === packageName || deps.has(depName)) {
       continue
     }
@@ -78,9 +79,9 @@ function getTransitiveDeps(graph, packageName) {
 }
 
 function classifyPackage(packageName) {
-  // TODO: classify into one of:
+  // TODO: 分类为以下类型之一：
   // "entry", "shared", "reactivity", "runtime", "compiler", "server", "other"
-  // This is a small teaching taxonomy for build profiles, not a full Vue package catalog.
+  // 这是用于理解 build profile 的小型教学分类，不是完整的 Vue package 目录。
   switch (packageName) {
     case "vue":
       return "entry"
@@ -104,12 +105,12 @@ function classifyPackage(packageName) {
 }
 
 function getBuildProfilePackages(graph, profile) {
-  // TODO: return sorted package names for these profiles:
+  // TODO: 为以下 profile 返回排序后的 package 名称：
   // - "runtime-only-browser"
   // - "full-browser"
   // - "sfc-tooling"
-  // Throw an Error for unknown profiles.
-  // Model each profile from its entry package plus the transitive workspace deps it needs.
+  // 未知 profile 需要抛出 Error。
+  // 每个 profile 都由入口 package 加上它所需的传递 workspace 依赖组成。
   switch (profile) {
     case "runtime-only-browser":
       return ["@vue/runtime-dom", ...getTransitiveDeps(graph, "@vue/runtime-dom")].sort()
@@ -122,7 +123,7 @@ function getBuildProfilePackages(graph, profile) {
   }
 }
 
-// === Test helpers ===
+// === 测试辅助函数 ===
 
 function assertEqual(actual, expected, label) {
   if (actual !== expected) {

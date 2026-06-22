@@ -1,9 +1,9 @@
-# Practice Session - 2026-06-15
+# 练习记录 - 2026-06-15
 
-## Concept Practiced
-- Concept: Monorepo 与包结构 | Difficulty: Intermediate | Exercise: Vue 3 package map round 2
+## 练习概念
+- 概念: Monorepo 与包结构 | 难度: 中级 | 练习: Vue 3 package map round 2
 
-## User's Submitted Code
+## 用户提交的代码
 ```javascript
 const packageRoles = {
   "@vue/shared": "跨包共享工具、常量和类型判断",
@@ -70,7 +70,7 @@ function classifyRelation(packageName) {
 }
 ```
 
-## AI Feedback
+## AI 反馈
 第二轮练习已经通过，说明你不只是记住了第一轮的 package 名称，而是开始能区分三层东西：包的角色、API 的归属原因、练习简化图和真实源码 package.json 的差异。
 
 做得好的地方：
@@ -87,6 +87,6 @@ function classifyRelation(packageName) {
 
 Context7 对照 Vue 官方文档后，本轮判断成立：`@vue/compiler-sfc` 是处理 SFC 的低层工具，并作为主 Vue 包依赖；runtime-only build 会排除 compiler，full build 才支持浏览器内模板编译；SFC 通常通过构建工具预编译成标准 ES module。
 
-## Assessment
-- Understanding: Solid
-- Status: needs_practice → needs_practice | Confidence: 0.15 → 0.3
+## 评估
+- 理解程度: 扎实
+- 状态: needs_practice → needs_practice | 信心值: 0.15 → 0.3

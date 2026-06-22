@@ -1,6 +1,6 @@
-# Monorepo 与包结构 — Dependency Layers and Build Profiles
+# Monorepo 与包结构 — 依赖层级与构建场景
 
-## Goal
+## 练习目标
 
 第四轮练习从“读取真实 `package.json` 依赖图”推进到“解释 Vue 包的层级边界和构建场景”。
 
@@ -11,7 +11,7 @@
 - runtime-only build、full build、SFC tooling 三种场景分别需要哪些包？
 - 为什么 `package.json` 依赖图和最终 bundle 内容不是一回事？
 
-## Background
+## 背景
 
 Context7 查询到的 Vue 官方资料给出几个重要边界：
 
@@ -22,12 +22,12 @@ Context7 查询到的 Vue 官方资料给出几个重要边界：
 
 这意味着：你可以从 `packages/*/package.json` 读出真实 workspace 依赖，但还需要建立“源码包依赖”和“具体构建产物包含内容”之间的区别。嘿，这里正是 Vue monorepo 有趣的地方：依赖图像地图，bundle 像路线规划。
 
-## Files
+## 文件
 
 - `starter-round4.mjs`：你要编辑的练习文件。
 - `README-round4.md`：本说明文件。
 
-## Requirements
+## 实现要求
 
 - [ ] 实现 `readPackageJson(packageDir)`。
 - [ ] 实现 `isWorkspaceRange(value)`，只接受字符串形式的 `workspace:` 依赖。
@@ -38,7 +38,7 @@ Context7 查询到的 Vue 官方资料给出几个重要边界：
 - [ ] 实现 `getBuildProfilePackages(graph, profile)`。
 - [ ] 运行 `node starter-round4.mjs`，让所有测试通过。
 
-## Profiles
+## 构建场景
 
 `getBuildProfilePackages(graph, profile)` 需要支持三个 profile：
 
@@ -46,7 +46,7 @@ Context7 查询到的 Vue 官方资料给出几个重要边界：
 - `full-browser`：浏览器运行时 + template compiler，用于浏览器内模板编译。
 - `sfc-tooling`：SFC 工具链，以 `@vue/compiler-sfc` 为入口读取其传递依赖。
 
-## Hints
+## 提示
 
 <details>
 <summary>点开看提示</summary>
@@ -60,6 +60,6 @@ Context7 查询到的 Vue 官方资料给出几个重要边界：
 
 </details>
 
-## Done Signal
+## 完成信号
 
 当 `node starter-round4.mjs` 输出 `All round 4 tests passed` 后，告诉我“第四轮练习完成”。我会读取你的代码、给反馈，并根据表现更新学习状态。

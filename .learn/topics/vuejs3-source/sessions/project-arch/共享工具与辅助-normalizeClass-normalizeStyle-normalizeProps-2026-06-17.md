@@ -1,9 +1,9 @@
-# 共享工具与辅助：normalizeClass / normalizeStyle / normalizeProps — Learning Session
+# 共享工具与辅助：normalizeClass / normalizeStyle / normalizeProps — 学习记录
 
-Date: 2026-06-17
-Topic: Vue.js 3.x 源码学习
-Path: 工程架构 (Project Architecture) → 共享工具与辅助 → normalizeClass / normalizeStyle / normalizeProps
-Level: intermediate
+日期: 2026-06-17
+主题: Vue.js 3.x 源码学习
+路径: 工程架构 (Project Architecture) → 共享工具与辅助 → normalizeClass / normalizeStyle / normalizeProps
+水平: 中级
 
 ## 1. 这个小主题在 Vue 里的位置
 

@@ -1,9 +1,9 @@
-# Practice Session - 2026-06-16
+# 练习记录 - 2026-06-16
 
-## Concept Practiced
-- Concept: Monorepo 与包结构 | Difficulty: Intermediate | Exercise: Dependency Layers and Build Profiles
+## 练习概念
+- 概念: Monorepo 与包结构 | 难度: 中级 | 练习: 依赖层级与构建场景
 
-## User's Submitted Code
+## 用户提交的代码
 ```javascript
 function getTransitiveDeps(graph, packageName) {
   const deps = new Set()
@@ -36,7 +36,7 @@ function getBuildProfilePackages(graph, profile) {
 }
 ```
 
-## AI Feedback
+## AI 反馈
 这轮完成得很扎实：你已经从“按分类过滤包”推进到了“从入口包沿 workspace dependency graph 走传递依赖”，这正是 round4 要抓住的核心。`getTransitiveDeps` 用 `Set + stack` 处理重复依赖和潜在环路，`getBuildProfilePackages` 也能用入口包表达三种场景：`runtime-only-browser` 从 `@vue/runtime-dom` 出发，`full-browser` 在 runtime 基础上加入 `@vue/compiler-dom`，`sfc-tooling` 从 `@vue/compiler-sfc` 出发。
 
 我想追问你两个巩固问题：第一，为什么 `full-browser` 要包含 `@vue/compiler-dom`，但不包含 `@vue/compiler-sfc`？第二，为什么 `sfc-tooling` 会包含 `@vue/compiler-ssr`，但不应该包含 `@vue/runtime-dom`？如果你能不用看代码讲清楚这两个问题，这个概念就很接近掌握了。
@@ -45,6 +45,6 @@ function getBuildProfilePackages(graph, profile) {
 
 Context7 查到的 Vue 官方说明与你这次模型一致：runtime-only build 在模板已预编译时排除 compiler，full build 为浏览器内模板编译包含 compiler；`@vue/compiler-sfc` 属于 SFC 工具链，SFC 通常由构建工具预编译成标准 JavaScript 模块。
 
-## Assessment
-- Understanding: Solid
-- Status: needs_practice → needs_practice | Confidence: 0.50 → 0.62
+## 评估
+- 理解程度: 扎实
+- 状态: needs_practice → needs_practice | 信心值: 0.50 → 0.62

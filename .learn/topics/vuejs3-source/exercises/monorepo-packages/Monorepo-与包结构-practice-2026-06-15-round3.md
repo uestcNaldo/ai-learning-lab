@@ -1,9 +1,9 @@
-# Practice Session - 2026-06-15
+# 练习记录 - 2026-06-15
 
-## Concept Practiced
-- Concept: Monorepo 与包结构 | Difficulty: Challenge | Exercise: Vue 3 source package dependency graph
+## 练习概念
+- 概念: Monorepo 与包结构 | 难度: 挑战 | 练习: Vue 3 source package dependency graph
 
-## User's Submitted Code
+## 用户提交的代码
 ```javascript
 import fs from "node:fs"
 import path from "node:path"
@@ -63,7 +63,7 @@ function classifyPackage(packageName) {
 }
 ```
 
-## AI Feedback
+## AI 反馈
 这次第三轮练习完成得很好，已经从“手写 Vue 包依赖图”升级到了“读取真实 Vue 源码 package.json 并自动生成 workspace 依赖图”。这一步很关键，因为源码学习不能长期停留在记忆图谱上，最终要能让代码和文件系统自己告诉你事实。
 
 你做得好的地方：
@@ -81,6 +81,6 @@ function classifyPackage(packageName) {
 
 Context7 对照 Vue 官方文档后，本轮练习的理解方向是成立的：`@vue/compiler-sfc` 是处理 SFC 的低层工具，并作为主 Vue 包依赖；SFC 通常通过构建工具预编译；runtime-only build 会排除 compiler，而 full build 才包含浏览器内模板编译能力。
 
-## Assessment
-- Understanding: Solid
-- Status: needs_practice → needs_practice | Confidence: 0.3 → 0.45
+## 评估
+- 理解程度: 扎实
+- 状态: needs_practice → needs_practice | 信心值: 0.3 → 0.45

@@ -1,7 +1,8 @@
 /**
  * Monorepo 与包结构 — Source Reading Challenge
  *
- * Replace every TODO with real implementation. Then run:
+ * 把每个 TODO 替换成真实实现。
+ * 然后运行：
  *
  *   node starter-round3.mjs
  */
@@ -12,23 +13,23 @@ import path from "node:path"
 const VUE_PACKAGES_DIR = "/Users/naldomac/Projects/vuejs/core/packages"
 
 function readPackageJson(packageDir) {
-  // TODO: read and parse package.json inside packageDir.
-  // Return the parsed JSON object.
+  // TODO: 读取并解析 packageDir 内部的 package.json。
+  // 返回解析后的 JSON 对象。
   return JSON.parse(fs.readFileSync(path.join(packageDir, "package.json"), "utf-8"))
 }
 
 function getWorkspaceDeps(packageJson) {
-  // TODO: return dependency names whose version starts with "workspace:".
-  // Only inspect packageJson.dependencies, not devDependencies.
+  // TODO: 返回版本号以 "workspace:" 开头的依赖名称。
+  // 只检查 packageJson.dependencies，不检查 devDependencies。
   return Object.keys(packageJson.dependencies || {})
     .filter(dep => packageJson.dependencies[dep].startsWith("workspace:"))
 }
 
 function buildWorkspaceDependencyGraph(packagesDir) {
   // TODO:
-  // 1. read all direct child directories under packagesDir
-  // 2. read each package.json
-  // 3. return an object: { [packageName]: workspaceDependencyNames[] }
+  // 1. 读取 packagesDir 下的所有直接子目录。
+  // 2. 读取每个 package.json。
+  // 3. 返回对象：{ [packageName]: workspaceDependencyNames[] }。
   const graph = {}
   const packageDirs = fs.readdirSync(packagesDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
@@ -43,12 +44,12 @@ function buildWorkspaceDependencyGraph(packagesDir) {
 }
 
 function getDependents(graph, targetPackage) {
-  // TODO: return package names whose dependency list includes targetPackage.
+  // TODO: 返回依赖列表中包含 targetPackage 的 package 名称。
   return Object.keys(graph).filter(packageName => graph[packageName].includes(targetPackage))
 }
 
 function classifyPackage(packageName) {
-  // TODO: classify into one of:
+  // TODO: 分类为以下类型之一：
   // "entry", "shared", "reactivity", "runtime", "compiler", "server", "other"
   switch (packageName) {
     case "vue":
@@ -76,7 +77,7 @@ function classifyPackage(packageName) {
   }
 }
 
-// === Test helpers ===
+// === 测试辅助函数 ===
 
 function assertEqual(actual, expected, label) {
   if (actual !== expected) {

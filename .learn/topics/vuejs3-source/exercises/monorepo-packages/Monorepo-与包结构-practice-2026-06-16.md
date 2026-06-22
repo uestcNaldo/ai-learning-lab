@@ -1,9 +1,9 @@
-# Practice Session - 2026-06-16
+# 练习记录 - 2026-06-16
 
-## Concept Practiced
-- Concept: Monorepo 与包结构 | Difficulty: Intermediate | Exercise: Source Reading Challenge
+## 练习概念
+- 概念: Monorepo 与包结构 | 难度: 中级 | 练习: 源码阅读挑战
 
-## User's Submitted Code
+## 用户提交的代码
 ```javascript
 /**
  * Monorepo 与包结构 — Source Reading Challenge
@@ -166,7 +166,7 @@ assertEqual(classifyPackage("@vue/compat"), "other", "compat classification")
 console.log("All round 3 tests passed")
 ```
 
-## AI Feedback
+## AI 反馈
 你这轮练习的核心完成得不错：代码能够从真实 Vue 源码仓库的 `packages/*/package.json` 中读取 workspace 依赖，并且测试确认了 `vue`、`@vue/runtime-dom`、`@vue/compiler-sfc`、`@vue/shared` 这些关键包的关系。尤其是 `@vue/compiler-dom`、`@vue/compiler-sfc`、`@vue/compiler-ssr` 都被归到 compiler，这说明你已经不只是记包名，而是在按“运行时 / 编译器 / 入口 / 共享工具”的职责边界理解包结构。
 
 我想追问你两个问题来巩固：第一，为什么 `vue` 主包会依赖 `@vue/compiler-sfc`，但普通浏览器运行时又不应该把 SFC compiler 发到最终业务包里？第二，`@vue/runtime-dom` 同时依赖 `@vue/runtime-core` 和 `@vue/reactivity`，这说明 DOM runtime 与平台无关 runtime、响应式系统之间是什么方向的依赖关系？
@@ -175,6 +175,6 @@ console.log("All round 3 tests passed")
 
 代码质量上，`console.log(graph)` 对学习很有帮助，它让依赖图一眼可见；但如果把这个文件作为测试练习提交，建议把它改成可选调试输出，或者在测试通过后删除。Context7 查到的 Vue 官方说明也支持这条理解线：SFC 通常由构建工具预编译，runtime-only build 不包含 compiler；`@vue/compiler-sfc` 是低层 SFC 处理工具，并通过 `vue/compiler-sfc` deep import 保持与运行时版本同步。
 
-## Assessment
-- Understanding: Good
-- Status: needs_practice → needs_practice | Confidence: 0.45 → 0.50
+## 评估
+- 理解程度: 良好
+- 状态: needs_practice → needs_practice | 信心值: 0.45 → 0.50

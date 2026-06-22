@@ -1,17 +1,17 @@
-# 共享工具与辅助：PatchFlags / ShapeFlags — Learning Session
+# 共享工具与辅助：PatchFlags / ShapeFlags — 学习记录
 
-> **Date:** 2026-06-16
-> **Topic:** Vue.js 3.x 源码学习
-> **Path:** 工程架构 (Project Architecture) → 共享工具与辅助 → PatchFlags / ShapeFlags
-> **Level:** intermediate
+> **日期:** 2026-06-16
+> **主题:** Vue.js 3.x 源码学习
+> **路径:** 工程架构 (Project Architecture) → 共享工具与辅助 → PatchFlags / ShapeFlags
+> **水平:** 中级
 
 ---
 
-## Positioning
+## 定位
 
 `PatchFlags / ShapeFlags` 是 `@vue/shared` 中最重要的跨包协议之一：compiler 用它们给 VNode 打标签，runtime 用它们快速判断“这个节点是什么”和“更新时只需要做哪些事”。
 
-## Analogy
+## 类比
 
 可以把 Vue 的渲染过程想成快递分拣中心。
 
@@ -24,7 +24,7 @@
 - `ShapeFlags` 解决“它是什么形状？”
 - `PatchFlags` 解决“更新它时哪里可能变？”
 
-## Core Mechanism
+## 核心机制
 
 `ShapeFlags` 和 `PatchFlags` 都放在 `@vue/shared`，因为它们不是单个包的私有实现，而是多个包之间必须共享的协议。
 
@@ -108,7 +108,7 @@ Boolean(flag & ShapeFlags.TEXT_CHILDREN) // false
 
 `PatchFlags` 是 compiler 给 runtime 的更新提示。它回答“这个 VNode 更新时有哪些动态部分需要检查”。
 
-## Code Example
+## 代码示例
 
 ```ts
 enum ShapeFlags {
@@ -208,7 +208,7 @@ patchElement(oldVNode, newVNode)
 
 这就是 Vue compiler 和 runtime 的协作方式：compiler 越能准确描述动态点，runtime 就越能少做无用判断。
 
-## Common Misconceptions
+## 常见误区
 
 误区一：认为 `ShapeFlags` 和 `PatchFlags` 是一回事。它们都用位运算，但语义不同：`ShapeFlags` 描述 VNode 的结构类型，`PatchFlags` 描述更新时的动态部分。
 
@@ -220,7 +220,7 @@ patchElement(oldVNode, newVNode)
 
 误区五：认为 `PatchFlags.CLASS` 表示 class 一定变了。更准确地说，它表示 class 是动态的，runtime 仍会比较 old/new class，再决定是否真正 patch DOM。
 
-## Socratic Check
+## 思考检查
 
 如果一个 VNode 的 `shapeFlag` 同时包含 `ELEMENT` 和 `ARRAY_CHILDREN`，runtime 可以从这两个标签推断出什么处理路径？
 
@@ -228,10 +228,10 @@ patchElement(oldVNode, newVNode)
 
 ---
 
-## Quick Summary
+## 快速总结
 - `ShapeFlags` 是 VNode 形状标签，帮助 runtime 快速选择处理流程。
 - `PatchFlags` 是 compiler 给 runtime 的更新提示，帮助 patch 阶段少做无用 diff。
 - 两者都放在 `@vue/shared`，因为它们是 compiler、runtime、VNode 创建逻辑之间共享的协议。
 
-## Next Steps
+## 下一步
 (Will be updated after the user chooses a sub-topic direction)

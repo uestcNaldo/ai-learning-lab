@@ -1,7 +1,8 @@
 /**
  * Monorepo 与包结构 — Intermediate Round 2
  *
- * Replace every TODO with a precise explanation or implementation. Then run:
+ * 把每个 TODO 替换成准确的解释或实现。
+ * 然后运行：
  *
  *   node starter-round2.mjs
  */
@@ -23,7 +24,7 @@ const simplifiedDeps = {
   vue: ["@vue/shared", "@vue/runtime-dom", "@vue/compiler-sfc"],
 }
 
-// Derived from your local Vue source package.json files.
+// 来自你本地 Vue 源码中的 package.json 文件。
 const realWorkspaceDeps = {
   "@vue/runtime-dom": ["@vue/shared", "@vue/runtime-core", "@vue/reactivity"],
   "@vue/compiler-sfc": [
@@ -55,7 +56,7 @@ const apiOwners = {
 function explainApiOwner(apiName) {
   const owner = apiOwners[apiName]
 
-  // TODO: return different explanations for at least:
+  // TODO: 至少为下面这些 API 返回不同解释：
   // reactive, createRenderer, createApp, parse, compileTemplate.
   if (apiName === "reactive") {
     return `${apiName} belongs to ${owner} because reactive是响应式系统的核心API，而@vue/reactivity是负责实现响应式系统的包，所以reactive属于@vue/reactivity。`
@@ -78,8 +79,8 @@ function explainApiOwner(apiName) {
 }
 
 function getRealExtraDeps(packageName) {
-  // TODO: return dependencies that exist in realWorkspaceDeps but not simplifiedDeps.
-  // Order does not matter.
+  // TODO: 返回存在于 realWorkspaceDeps 但不存在于 simplifiedDeps 的依赖。
+  // 顺序不重要。
   if (packageName === "@vue/runtime-dom") {
     return ["@vue/reactivity"]
   }
@@ -92,7 +93,7 @@ function getRealExtraDeps(packageName) {
 }
 
 function classifyRelation(packageName) {
-  // TODO: return one of: "shared", "reactivity", "runtime", "compiler", "entry".
+  // TODO: 返回以下分类之一："shared", "reactivity", "runtime", "compiler", "entry"。
   if (packageName === "vue") {
     return "entry"
   }
@@ -110,7 +111,7 @@ function classifyRelation(packageName) {
   }
 }
 
-// === Test helpers ===
+// === 测试辅助函数 ===
 
 function assertEqual(actual, expected, label) {
   if (actual !== expected) {

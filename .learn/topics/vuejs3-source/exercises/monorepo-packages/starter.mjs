@@ -1,8 +1,8 @@
 /**
  * Monorepo 与包结构 — Beginner
  *
- * Replace every TODO with the best package role, dependency list, or function
- * implementation. Then run:
+ * 把每个 TODO 替换成最合适的 package 角色、依赖列表或函数实现。
+ * 然后运行：
  *
  *   node starter.mjs
  */
@@ -54,19 +54,19 @@ const apiOwners = {
 }
 
 function dependencyChainToVueRuntimeDom() {
-  // TODO: return the dependency chain from the lowest shared layer to runtime-dom.
-  // Expected shape: ["@vue/shared", "...", "@vue/runtime-dom"]
+  // TODO: 返回从最底层 shared 到 runtime-dom 的依赖链路。
+  // 期望形状：["@vue/shared", "...", "@vue/runtime-dom"]
   return ["@vue/shared", "@vue/reactivity", "@vue/runtime-core", "@vue/runtime-dom"]
 }
 
 function explainApiOwner(apiName) {
-  // TODO: return a sentence like:
+  // TODO: 返回类似下面这样的句子：
   // "reactive belongs to @vue/reactivity because ..."
   const owner = apiOwners[apiName]
   return `${apiName} belongs to ${owner} because reactive是响应式系统的核心API，而@vue/reactivity是负责实现响应式系统的包，所以reactive属于@vue/reactivity。`
 }
 
-// === Test cases ===
+// === 测试用例 ===
 
 function assertEqual(actual, expected, label) {
   if (actual !== expected) {

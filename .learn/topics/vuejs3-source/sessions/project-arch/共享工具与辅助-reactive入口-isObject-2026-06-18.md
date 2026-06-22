@@ -1,17 +1,17 @@
-# 共享工具与辅助 — Learning Session
+# 共享工具与辅助 — 学习记录
 
-> **Date:** 2026-06-18
-> **Topic:** Vue.js 3.x 源码学习
-> **Path:** 工程架构 (Project Architecture) → 共享工具与辅助 → reactive() 入口：isObject 如何决定哪些值能被 Proxy
-> **Level:** beginner/intermediate
+> **日期:** 2026-06-18
+> **主题:** Vue.js 3.x 源码学习
+> **路径:** 工程架构 (Project Architecture) → 共享工具与辅助 → reactive() 入口：isObject 如何决定哪些值能被 Proxy
+> **水平:** 入门/中级
 
 ---
 
-## Positioning
+## 定位
 
 `reactive()` 入口里的 `isObject` 是 Vue 响应式系统的第一道类型闸门：它决定一个值是否有资格进入 `Proxy` 代理流程。
 
-## Analogy
+## 类比
 
 可以把 `reactive()` 想成一个“响应式加工厂”，`Proxy` 是工厂里的大型机器。
 
@@ -19,7 +19,7 @@
 
 这个判断看起来很小，但它让 `reactive()` 的入口保持安全：能代理的才代理，不能代理的就原样返回。
 
-## Core Mechanism
+## 核心机制
 
 Vue 官方 API 把 `reactive()` 描述为“返回对象的响应式代理”，类型也是：
 
@@ -115,7 +115,7 @@ export const toReactive = <T extends unknown>(value: T): T =>
 
 它的语义非常干净：对象就转成 reactive，非对象就原样返回。
 
-## Code Example
+## 代码示例
 
 > **📁 Source:** `/Users/naldomac/Projects/vuejs/core/packages/reactivity/src/reactive.ts:85-99`, `/Users/naldomac/Projects/vuejs/core/packages/reactivity/src/reactive.ts:262-278`, `/Users/naldomac/Projects/vuejs/core/packages/shared/src/general.ts:53-54`
 
@@ -158,26 +158,26 @@ console.log(b.nested.msg) // 'hi'
 
 真实 Vue 源码还会继续处理 readonly、已有 Proxy、`ReactiveFlags.SKIP`、不可扩展对象、collection handlers、proxy 缓存等分支；但第一道门就是 `isObject`。
 
-## Common Misconceptions
+## 常见误区
 
 - 误区 1：`reactive()` 可以让任何值都响应式。更准确地说，`reactive()` 面向对象；primitive 应该优先用 `ref()`。
 - 误区 2：`isObject` 只是为了 TypeScript 类型好看。不是，它也是运行时安全检查，避免把 primitive 传给 `Proxy`。
 - 误区 3：Vue 会一开始深度遍历整个对象树并全部代理。实际更接近“懒代理”：访问到嵌套对象时，再通过 `isObject` 判断是否继续 reactive。
 - 误区 4：函数也是对象，所以应该能过 `isObject`。Vue 这里的 `isObject` 使用 `typeof val === 'object'`，函数不会通过，它关注的是响应式对象处理场景。
 
-## Socratic Check
+## 思考检查
 
 1. 为什么 `reactive(1)` 不应该直接调用 `new Proxy(1, handlers)`？答案是：`Proxy` 的 target 必须是对象，primitive 会导致运行时错误，所以 Vue 需要先用 `isObject` 拦住。
 2. 为什么嵌套对象可以在访问时才变成 reactive？答案是：getter 读取到嵌套值后，再用 `isObject(res)` 判断它是否需要进入 `reactive(res)`，这就是按需代理的入口。
 
 ---
 
-## Quick Summary
+## 快速总结
 
 - `reactive()` 的公开语义是“创建对象的响应式代理”，不是代理任意值。
 - `isObject` 是 `createReactiveObject()` 里的第一道运行时闸门，非对象会被原样返回。
 - 深层响应式也依赖 `isObject`：读取嵌套对象时，Vue 才按需继续创建代理。
 
-## Next Steps
+## 下一步
 
 (Will be updated after the user chooses a sub-topic direction)
