@@ -47,20 +47,91 @@ function normalizeClass(value) {
   // 示例：
   // normalizeClass(["btn", ["primary"], { active: true, hidden: false }])
   // -> "btn primary active"
+  if (typeof value === 'string') {
+    return value
+  }
+  if (isObject(value) && !Array.isArray(value)) {
+    return Object.entries(value).filter(([k, v]) => v === true || Boolean(v) === true).map(([k, v]) => {
+      return k
+    }).join(' ')
+  }
+  if (Array.isArray(value)) {
+    return value.map(item => {
+      return normalizeClass(item).trim()
+    }).join(' ').trim()
+  }
+  return ''
+}
+
+
+/**
+ *
+ * @param {string} value 字符串
+ */
+function camelCaseToKebabCased (value) {
+  function upperToLower (match, offset, string) {
+    return (offset > 0 ? '-' : '') + match.toLowerCase()
+  }
+  return value.replace(/[A-Z]/g, upperToLower)
 }
 
 function normalizeStyle(value) {
   // TODO: 支持 string、object 和 array。
   // 顶层 string 应保持 string；只有出现在 array 内部时，才需要解析并合并。
+  if (typeof value === 'string') {
+    return value
+  }
+
+  if (!Array.isArray(value) && isObject(value)) {
+    return value
+  }
+
+  if (Array.isArray(value)) {
+    const result = {}
+    for (const item of value) {
+      if (typeof item === 'string') {
+        const styleObj = parseStringStyle(item)
+        Object.assign(result, styleObj)
+      }
+      if (isObject(item)) {
+        Object.assign(result, item)
+      }
+    }
+    return result
+  }
 }
 
 function normalizeProps(props) {
   // TODO: 传入 null 时返回 null；否则在存在 props.class 和 props.style 时进行标准化。
+  if (props === null) {
+    return null
+  }
+  const result = {}
+  if (props.class) {
+    result.class = normalizeClass(props.class)
+  }
+  if (props.style) {
+    result.style = normalizeStyle(props.style)
+  }
+  return result
 }
 
 function createReactiveGate(value) {
   // TODO: 如果 value 不是对象，原样返回。
   // 如果 value 是对象，返回一个通过 Reflect 支持基础 get/set 的 Proxy。
+  if (!isObject(value)) {
+    return value
+  } else {
+    const proxy = new Proxy(value, {
+      get (target, prop, receiver) {
+        return Reflect.get(target, prop, receiver)
+      },
+      set (target, prop, newValue, receiver) {
+        return Reflect.set(target, prop, newValue, receiver)
+      }
+    })
+    return proxy
+  }
 }
 
 function runTests() {

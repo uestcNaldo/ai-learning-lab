@@ -136,7 +136,7 @@
   - 核心类型定义
   - 泛型推导
   - 类型体操 (ExtractComputedReturns等)
-- 🔵 **共享工具与辅助** (in progress)
+- 🟠 **共享工具与辅助** (needs practice)
   - @vue/shared 工具函数
   - 全局变量 (\_\_DEV\_\_, \_\_TEST\_\_)
   - 通用缓存 (LRU)

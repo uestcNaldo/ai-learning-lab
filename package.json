@@ -1,0 +1,20 @@
+{
+  "name": "ai-learning-lab",
+  "version": "1.0.0",
+  "description": "使用learning-anything技能，通过配置context7查询官方文档，实现学习知识地图",
+  "homepage": "https://github.com/uestcNaldo/ai-learning-lab#readme",
+  "bugs": {
+    "url": "https://github.com/uestcNaldo/ai-learning-lab/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uestcNaldo/ai-learning-lab.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "learn-serve": "npx learn-anything-cli serve"
+  }
+}

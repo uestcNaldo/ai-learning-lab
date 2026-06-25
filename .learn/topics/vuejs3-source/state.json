@@ -349,12 +349,12 @@
         {
           "name": "共享工具与辅助",
           "slug": "shared-utils",
-          "status": "in_progress",
-              "confidence": 0.2,
-              "practice_count": 0,
-              "explain_count": 5,
-              "last_explained": "2026-06-18",
-          "last_practiced": null,
+          "status": "needs_practice",
+          "confidence": 0.3,
+          "practice_count": 2,
+          "explain_count": 5,
+          "last_explained": "2026-06-18",
+          "last_practiced": "2026-06-24",
           "details": ["@vue/shared 工具函数", "全局变量 (__DEV__, __TEST__)", "通用缓存 (LRU)"]
         }
       ]
